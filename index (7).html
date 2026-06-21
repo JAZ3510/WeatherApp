@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== TOP NAVIGATION BAR ===== -->
+  <header class="navbar">
+    <h1 class="navbar__title">🌤 WeatherNow</h1>
+    <div class="navbar__search">
+      <input
+        type="text"
+        id="cityInput"
+        class="search__input"
+        placeholder="Search city…"
+        aria-label="City name"
+      />
+      <button id="searchBtn" class="search__btn" onclick="handleSearch()">Search</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== ERROR MESSAGE AREA ===== -->
+    <div id="errorMsg" class="error-msg" role="alert" aria-live="polite" hidden></div>
+
+    <!-- ===== LOADING INDICATOR ===== -->
+    <div id="loadingMsg" class="loading-msg" hidden>Loading…</div>
+
+    <!-- ===== HERO — current weather ===== -->
+    <section id="heroSection" class="hero" hidden>
+      <div class="hero__icon" id="weatherIcon">☀️</div>
+      <h2 class="hero__city" id="cityName">—</h2>
+      <p class="hero__country" id="countryName">—</p>
+      <p class="hero__temp" id="temperature">—</p>
+      <p class="hero__desc" id="weatherDesc">—</p>
+    </section>
+
+    <!-- ===== STATS ROW — humidity / wind / UV ===== -->
+    <section id="statsSection" class="stats" hidden>
+      <div class="stats__card">
+        <p class="stats__label">Humidity</p>
+        <p class="stats__value" id="humidity">—</p>
+      </div>
+      <div class="stats__card">
+        <p class="stats__label">Wind Speed</p>
+        <p class="stats__value" id="windSpeed">—</p>
+      </div>
+      <div class="stats__card">
+        <p class="stats__label">UV Index</p>
+        <p class="stats__value" id="uvIndex">—</p>
+      </div>
+    </section>
+
+    <!-- ===== 5-DAY FORECAST ===== -->
+    <section id="forecastSection" class="forecast" hidden>
+      <h3 class="forecast__heading">5-Day Forecast</h3>
+      <div class="forecast__grid" id="forecastGrid">
+        <!-- Forecast cards injected by JS -->
+      </div>
+    </section>
+
+    <!-- ===== BONUS: SEARCH HISTORY ===== -->
+    <section id="historySection" class="history" hidden>
+      <p class="history__label">Recent searches:</p>
+      <div class="history__chips" id="historyChips"></div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
