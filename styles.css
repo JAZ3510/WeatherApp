@@ -1,0 +1,348 @@
+/* ============================================================
+   styles.css — WeatherNow
+   Colour tokens:
+     Navy  #1A3C5E  — header / navbar
+     Teal  #2E86AB  — hero section
+     White #FFFFFF  — forecast / stats background
+   ============================================================ */
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f0f4f8;
+  color: #1a1a2e;
+  min-height: 100vh;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  background: #1A3C5E;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.navbar__title {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.navbar__search {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: flex-end;
+  max-width: 420px;
+}
+
+.search__input {
+  flex: 1;
+  padding: 0.55rem 0.9rem;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.search__input:focus {
+  border-color: #2E86AB;
+}
+
+.search__btn {
+  padding: 0.55rem 1.2rem;
+  background: #2E86AB;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search__btn:hover {
+  background: #1f6488;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ---------- Page layout wrapper ---------- */
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* ---------- Error message ---------- */
+.error-msg {
+  background: #ffe3e3;
+  color: #c0392b;
+  border: 1px solid #f5c6c6;
+  border-radius: 8px;
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ---------- Loading indicator ---------- */
+.loading-msg {
+  text-align: center;
+  color: #2E86AB;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 2rem 0;
+  letter-spacing: 1px;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ---------- Hero section ---------- */
+.hero {
+  background: #2E86AB;
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 2.5rem 1.5rem 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 6px 20px rgba(46, 134, 171, 0.3);
+}
+
+.hero__icon {
+  font-size: 4.5rem;
+  margin-bottom: 0.4rem;
+  /* BONUS: animated weather icon (spin for clear sky is applied via JS class) */
+  display: inline-block;
+}
+
+/* Spin animation applied to .hero__icon.spin by JS for clear sky */
+.hero__icon.spin {
+  animation: spin-sun 8s linear infinite;
+}
+
+@keyframes spin-sun {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Bounce animation applied to .hero__icon.bounce by JS for rain */
+.hero__icon.bounce {
+  animation: bounce-rain 1s ease-in-out infinite alternate;
+}
+
+@keyframes bounce-rain {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+.hero__city {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.1rem;
+}
+
+.hero__country {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin-bottom: 0.6rem;
+}
+
+.hero__temp {
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.hero__desc {
+  font-size: 1.1rem;
+  margin-top: 0.35rem;
+  opacity: 0.9;
+}
+
+/* BONUS: °C / °F toggle button */
+.unit-toggle {
+  display: inline-block;
+  margin-top: 0.9rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.unit-toggle:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+/* ---------- Stats row ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stats__card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.1rem 0.75rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.stats__label {
+  font-size: 0.78rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+}
+
+.stats__value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1A3C5E;
+}
+
+/* ---------- Forecast section ---------- */
+.forecast {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 1.5rem 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  margin-bottom: 1rem;
+}
+
+.forecast__heading {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.forecast__grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+.forecast__card {
+  text-align: center;
+  padding: 0.75rem 0.4rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.forecast__card:hover {
+  background: #f0f7fb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(46, 134, 171, 0.15);
+}
+
+.forecast__day {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.forecast__icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.forecast__high {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1A3C5E;
+}
+
+.forecast__low {
+  font-size: 0.82rem;
+  color: #9ca3af;
+}
+
+/* ---------- BONUS: search history chips ---------- */
+.history {
+  margin-top: 0.5rem;
+}
+
+.history__label {
+  font-size: 0.78rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.history__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.history__chip {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  color: #1A3C5E;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.history__chip:hover {
+  background: #2E86AB;
+  color: #fff;
+  border-color: #2E86AB;
+}
+
+/* ---------- Responsive — ≤480px ---------- */
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar__search {
+    width: 100%;
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .hero__temp {
+    font-size: 2.5rem;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .forecast__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
